@@ -13,14 +13,29 @@ function asyncHandler(cb) {
   };
 }
 
-// router.get("/", function (req, res, next) {
 router.get(
   "/",
   asyncHandler(async (req, res) => {
     const books = await Book.findAll();
-    res.render("index", { books });
-    // res.render('index', { title: 'Express' });
-    // console.log(books.map((book) => book.toJSON()));
+    templateData = { books };
+    res.render("index", templateData);
+  })
+);
+
+router.get("/new", (req, res) => {
+  res.render("new-book");
+});
+
+router.post("/new", (req, res) => {
+  // TODO
+});
+
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const book = await Book.findByPk(req.params.id);
+    templateData = { book };
+    res.render("update-book", templateData);
   })
 );
 

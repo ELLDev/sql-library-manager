@@ -1,20 +1,10 @@
-const createError = require("http-errors");
 const express = require("express");
-const path = require("path");
-
 const indexRouter = require("./routes/index");
 const bookRouter = require("./routes/books");
-
 const db = require("./models/index");
 const app = express();
 
-// view engine setup
-// app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-// app.use(express.static(path.join(__dirname, "public")));
 app.use("/static", express.static("public"));
 
 app.use("/", indexRouter);
